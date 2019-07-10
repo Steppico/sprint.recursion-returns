@@ -1,6 +1,6 @@
 const getElementsByClassName = (target) => {
   const result = [];
-  function recursion(node) {
+  const recursion = (node) => {
     if (node.classList && node.classList.contains(target)) {
       result.push(node);
     }
@@ -9,7 +9,7 @@ const getElementsByClassName = (target) => {
         recursion(child);
       }
     }
-  }
+  };
   recursion(document.body);
   return result;
 };
