@@ -1,8 +1,7 @@
 const getElementsByClassName = (target) => {
   const result = [];
   function recursion(node) {
-    console.log(node.className.includes(target));
-    if (node.className === target) {
+    if (node.classList && node.classList.contains(target)) {
       result.push(node);
     }
     if (node.childNodes) {
