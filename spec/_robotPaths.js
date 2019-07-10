@@ -18,7 +18,7 @@ describe("robotPaths", () => {
     expect(result).to.be.a("number");
   });
 
-  it("should return a number greater than zero for non-empty grids", () => {
+  it.only("should return a number greater than zero for non-empty grids", () => {
     const result = new RobotPaths(3).solve();
     expect(result).to.be.greaterThan(0);
   });
