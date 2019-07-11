@@ -29,60 +29,42 @@ class RobotPaths {
 
   solve() {
     const chizu = this.board.board;
-    console.log("chizu", chizu);
     const endPoint = [chizu.length - 1, chizu.length - 1];
     let count = 0;
 
-    const up = () => {
-      if (
-        !this.board.hasBeenVisited(this.row - 1, this.col) &&
-        chizu[this.row - 1][this.col] !== undefined
-      ) {
-        this.row -= 1;
-        return recursion(this.row, this.col);
+    const up = (row, col) => {
+      if (row - 1 >= 0 && !this.board.hasBeenVisited(row - 1, col)) {
+        recursion(row - 1, col);
       }
     };
-    const right = () => {
-      this.col += 1;
-      if (
-        !this.board.hasBeenVisited(this.row, this.col) &&
-        chizu[this.row][this.col] !== undefined
-      ) {
-        return recursion(this.row, this.col);
+    const right = (row, col) => {
+      if (col + 1 <= endPoint[1] && !this.board.hasBeenVisited(row, col + 1)) {
+        recursion(row, col + 1);
       }
     };
-    const left = () => {
-      this.col -= 1;
-      if (
-        !this.board.hasBeenVisited(this.row, this.col) &&
-        chizu[this.row][this.col] !== undefined
-      ) {
-        return recursion(this.row, this.col);
+    const left = (row, col) => {
+      if (col - 1 >= 0 && !this.board.hasBeenVisited(row, col - 1)) {
+        recursion(row, col - 1);
       }
     };
-    const down = () => {
-      this.row += 1;
-      if (
-        !this.board.hasBeenVisited(this.row, this.col) &&
-        chizu[this.row][this.col] !== undefined
-      ) {
-        return recursion(this.row, this.col);
+    const down = (row, col) => {
+      if (row + 1 <= endPoint[0] && !this.board.hasBeenVisited(row + 1, col)) {
+        recursion(row + 1, col);
       }
     };
-
     const recursion = (row, col) => {
-      console.log("row", row, "col", col);
+      // console.log("row", row, "col", col);
       this.board.togglePiece(row, col);
       if (row === endPoint[0] && col === endPoint[1]) {
         count++;
-        console.log("count", count);
         this.board.togglePiece(row, col);
         return;
-        // } else if(allaroundmeistoggled) {
-        //   this.board.togglePiece(row, col)
-        //   return;
       }
-      return up() || right() || left() || down();
+      up(row, col);
+      right(row, col);
+      down(row, col);
+      left(row, col);
+      this.board.togglePiece(row, col);
     };
 
     recursion(this.row, this.col);
