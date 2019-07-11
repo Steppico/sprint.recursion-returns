@@ -19,8 +19,6 @@ class Board {
 }
 
 class RobotPaths {
-  // initialize all your options
-  // you may want to change this code later on, too
   constructor(size) {
     this.board = new Board(size);
     this.row = 0;
@@ -53,7 +51,6 @@ class RobotPaths {
       }
     };
     const recursion = (row, col) => {
-      // console.log("row", row, "col", col);
       this.board.togglePiece(row, col);
       if (row === endPoint[0] && col === endPoint[1]) {
         count++;
@@ -69,16 +66,6 @@ class RobotPaths {
 
     recursion(this.row, this.col);
     return count;
-
-    //base case
-    //postion === endpoint
-    //update count;
-
-    //something to do
-    //looking all direction
-    //toggle place
-    //check if it has been visited?
-    //move place
   }
 }
 
